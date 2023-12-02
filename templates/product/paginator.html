@@ -1,0 +1,22 @@
+<!-- start pagination area -->
+<div class="paginatoin-area text-center pt-28">
+    <div class="row">
+        <div class="col-12">
+            <ul class="pagination-box">
+
+                {% if products.has_previous %}
+                <li><a class="Previous" href="?page={{products.previous_page_number}}">Previous</a></li>
+                {% endif %}
+
+                {% for page in paginator.page_range  %}
+                <li {% if products.number == page %}class="active"{% endif %}><a href="?page={{page}}">{{page}}</a></li>
+                {% endfor %}
+
+                {% if products.has_next %}
+                <li><a class="Next" href="?page={{products.next_page_number}}"> Next </a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- end pagination area -->

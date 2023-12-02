@@ -1,0 +1,349 @@
+{% extends '../base/base.html' %}
+{% load static %}
+
+{% block title %} {{product.product_title}} - A Perfect Online Shop {% endblock title %}
+
+
+{% block body_content %}
+<!-- breadcrumb area start -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}">shop</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{product.title|truncatewords:8}}</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb area end -->
+
+<!-- product details wrapper start -->
+<div class="product-details-wrapper">
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-lg-9">
+
+                <!-- product details inner end -->
+                <div class="product-details-inner">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="product-large-slider mb-20 slick-arrow-style_2">
+                                <div class="pro-large-img img-zoom" id="img1">
+                                    <img src="{{product.product_image01.url}}" alt="" />
+                                </div>
+                                <div class="pro-large-img img-zoom" id="img2">
+                                    <img src="{{product.product_image01.url}}" alt="" />
+                                </div>
+                                <div class="pro-large-img img-zoom" id="img3">
+                                    <img src="{{product.product_image01.url}}" alt="" />
+                                </div>
+                                <div class="pro-large-img img-zoom" id="img4">
+                                    <img src="{{product.product_image01.url}}" alt="" />
+                                </div>
+                            </div>
+                            <div class="pro-nav slick-padding2 slick-arrow-style_2">
+                                <div class="pro-nav-thumb"><img src="{{product.product_image01.url}}" alt="" />
+                                </div>
+                                <div class="pro-nav-thumb"><img src="{{product.product_image01.url}}" alt="" />
+                                </div>
+                                <div class="pro-nav-thumb"><img src="{{product.product_image01.url}}" alt="" />
+                                </div>
+                                <div class="pro-nav-thumb"><img src="{{product.product_image01.url}}" alt="" />
+                                </div>
+                                <div class="pro-nav-thumb"><img src="{{product.product_image01.url}}" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="product-details-des mt-md-34 mt-sm-34">
+                                <h3>{{product.product_title}}</h3>
+                                <div class="ratings">
+                                    <span class="good"><i class="fa fa-star"></i></span>
+                                    <span class="good"><i class="fa fa-star"></i></span>
+                                    <span class="good"><i class="fa fa-star"></i></span>
+                                    <span class="good"><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <div class="pro-review">
+                                        <span>1 review(s)</span>
+                                    </div>
+                                </div>
+                                <div class="customer-rev">
+                                    <a href="#">(1 customer review)</a>
+                                </div>
+                                <div class="availability mt-10">
+                                    <h5>Availability:</h5>
+                                    <span>{{product.quantity}} in stock</span>
+                                </div>
+                                <div class="pricebox">
+                                    <del><span class="regular-price">{{product.current_price}} BDT</span></del> <span class="regular-price">{{product.discount_price}} BDT</span>
+                                </div>
+                                <p>{{product.short_descriptino}}</p>
+                                <div class="quantity-cart-box d-flex align-items-center">
+                                    
+                                        <div class="quantity">
+                                            <div class="pro-qty"><input type="text" value="1" name="quantity"></div>
+                                        </div>
+
+                                        <div class="action_link">
+                                            <a class="buy-btn" href="{% url 'add_to_cart' product.id %}">add to
+                                                cart<i class="fa fa-shopping-cart"></i></a>
+                                        </div>
+
+                                </div>
+                                <div class="useful-links mt-20">
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i
+                                            class="fa fa-refresh"></i>compare</a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Wishlist"><i
+                                            class="fa fa-heart-o"></i>wishlist</a>
+                                </div>
+                                <div class="share-icon mt-20">
+                                    <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
+                                    <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
+                                    <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
+                                    <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- product details inner end -->
+
+                <!-- product details reviews start -->
+                <div class="product-details-reviews mt-34">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product-review-info">
+                                <ul class="nav review-tab">
+                                    <li>
+                                        <a class="active" data-toggle="tab" href="#tab_one">description</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#tab_two">information</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#tab_three">reviews</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content reviews-tab">
+                                    <div class="tab-pane fade show active" id="tab_one">
+                                        <div class="tab-one">
+                                            {{product.product_details}}
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_two">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td>color</td>
+                                                    <td>black, blue, red</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>size</td>
+                                                    <td>L, M, S</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_three">
+                                        <form action="#" class="review-form">
+                                            <h5>1 review for Simple product 12</h5>
+                                            <div class="total-reviews">
+                                                <div class="rev-avatar">
+                                                    <img src="assets/img/about/avatar.jpg" alt="">
+                                                </div>
+                                                <div class="review-box">
+                                                    <div class="ratings">
+                                                        <span class="good"><i class="fa fa-star"></i></span>
+                                                        <span class="good"><i class="fa fa-star"></i></span>
+                                                        <span class="good"><i class="fa fa-star"></i></span>
+                                                        <span class="good"><i class="fa fa-star"></i></span>
+                                                        <span><i class="fa fa-star"></i></span>
+                                                    </div>
+                                                    <div class="post-author">
+                                                        <p><span>admin -</span> 30 Nov, 2018</p>
+                                                    </div>
+                                                    <p>Aliquam fringilla euismod risus ac bibendum. Sed sit amet sem
+                                                        varius ante feugiat lacinia. Nunc ipsum nulla, vulputate ut
+                                                        venenatis vitae, malesuada ut mi. Quisque iaculis, dui congue
+                                                        placerat pretium, augue erat accumsan lacus</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    <label class="col-form-label"><span class="text-danger">*</span>
+                                                        Your Name</label>
+                                                    <input type="text" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    <label class="col-form-label"><span class="text-danger">*</span>
+                                                        Your Email</label>
+                                                    <input type="email" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    <label class="col-form-label"><span class="text-danger">*</span>
+                                                        Your Review</label>
+                                                    <textarea class="form-control" required></textarea>
+                                                    <div class="help-block pt-10"><span class="text-danger">Note:</span>
+                                                        HTML is not translated!</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    <label class="col-form-label"><span class="text-danger">*</span>
+                                                        Rating</label>
+                                                    &nbsp;&nbsp;&nbsp; Bad&nbsp;
+                                                    <input type="radio" value="1" name="rating">
+                                                    &nbsp;
+                                                    <input type="radio" value="2" name="rating">
+                                                    &nbsp;
+                                                    <input type="radio" value="3" name="rating">
+                                                    &nbsp;
+                                                    <input type="radio" value="4" name="rating">
+                                                    &nbsp;
+                                                    <input type="radio" value="5" name="rating" checked>
+                                                    &nbsp;Good
+                                                </div>
+                                            </div>
+                                            <div class="buttons">
+                                                <button class="sqr-btn" type="submit">Continue</button>
+                                            </div>
+                                        </form> <!-- end of review-form -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- product details reviews end -->
+
+
+
+
+                <!-- related products area start -->
+                <div class="related-products-area mt-34">
+                    <div class="section-title mb-30">
+                        <div class="title-icon">
+                            <i class="fa fa-desktop"></i>
+                        </div>
+                        <h3>related products</h3>
+                    </div> <!-- section title end -->
+                    <!-- featured category start -->
+                    <div class="featured-carousel-active slick-padding slick-arrow-style">
+
+                        <!-- product single item start -->
+                        {% for related_products in related_products %}
+                        <div class="product-item fix">
+                            <div class="product-thumb">
+                                <a href="{% url 'product_details' related_products.product_slug %}">
+                                    <img src="{{related_products.product_image01.url}}" class="img-pri" alt="">
+                                    <img src="{{related_products.product_image01.url}}" class="img-sec" alt="">
+                                </a>
+                                <div class="product-label">
+                                    <span>hot</span>
+                                </div>
+                                <div class="product-action-link">
+                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span
+                                            data-toggle="tooltip" data-placement="left" title="Quick view"><i
+                                                class="fa fa-search"></i></span> </a>
+                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Wishlist"><i
+                                            class="fa fa-heart-o"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Compare"><i
+                                            class="fa fa-refresh"></i></a>
+                                    <a href="{% url 'add_to_cart' product.id %}" data-toggle="tooltip" data-placement="left" title="Add to cart"><i
+                                            class="fa fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <h4><a href="{% url 'product_details' related_products.product_slug %}">{{related_products.product_title}}</a>
+                                </h4>
+                                <div class="pricebox">
+                                    <del><span class="regular-price">{{related_products.discount_price}}</span></del>
+                                    <span class="regular-price">{{related_products.discount_price}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- product single item end -->
+
+                    </div>
+                    <!-- featured category end -->
+                </div>
+                <!-- related products area end -->
+
+            </div>
+
+
+            <!-- sidebar start -->
+            <div class="col-lg-3">
+                <div class="shop-sidebar-wrap fix mt-md-22 mt-sm-22">
+                    <!-- featured category start -->
+                    <div class="sidebar-widget mb-22">
+                        <div class="section-title-2 d-flex justify-content-between mb-28">
+                            <h3>featured</h3>
+                            <div class="category-append"></div>
+                        </div> <!-- section title end -->
+                        <div class="category-carousel-active row" data-row="4">
+
+                            {% for related_products in related_products %}
+                            <div class="col">
+                                <div class="category-item">
+                                    <div class="category-thumb">
+                                        <a href="{% url 'product_details' related_products.product_slug %}">
+                                            <img src="{{related_products.product_image01.url}}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="category-content">
+                                        <h4><a
+                                                href="{% url 'product_details' related_products.product_slug %}">{{related_products.product_title}}</a>
+                                        </h4>
+                                        <div class="price-box">
+                                            <div class="regular-price">
+                                                {{related_products.current_price}} BDT
+                                            </div>
+                                            <div class="old-price">
+                                                <del>{{related_products.discount_price}} BDT</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- end single item -->
+                            </div> <!-- end single item column -->
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <!-- featured category end -->
+
+
+                    <!-- sidebar banner start -->
+                    <div class="sidebar-widget mb-22">
+                        <div class="img-container fix img-full mt-30">
+                            <a href="#"><img src="{% static 'img/banner/banner_shop.jpg' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <!-- sidebar banner end -->
+                </div>
+            </div>
+            <!-- sidebar end -->
+
+
+        </div>
+    </div>
+</div>
+<!-- product details wrapper end -->
+<hr>
+
+{% endblock body_content %}

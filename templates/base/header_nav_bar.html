@@ -1,0 +1,27 @@
+{% load static %}
+{% url 'home' as home_url %}
+{% url 'products' as products_url %}
+{% url 'my_account' as my_account_url %}
+{% url 'logout' as logout_url %}
+{% url 'login' as login_url %}
+{% url 'registration' as registration_url %}
+
+<div class="main-menu">
+    <nav id="mobile-menu">
+        <ul>
+            <li {% if request.path == home_url %}class="active"{% endif %}><a href="{{home_url}}"><i class="fa fa-home"></i>Home</i></a> </li>
+
+            <li {% if request.path == products_url %}class="active"{% endif %}><a href="{{products_url}}">Shop</a></li>
+                {% if request.user.is_authenticated and request.user.is_customer == True %}
+                
+                <li {% if request.path == my_account_url %}class="active"{% endif %}><a href="{{my_account_url}}">My Account</a></li>
+                <li><a href="{{logout_url}}">Logout</a></li>
+                
+                {% else %}
+                <li {% if request.path == login_url %}class="active"{% endif %}><a href="{{login_url}}">Login</a></li>
+                <li {% if request.path == registration_url %}class="active"{% endif %}><a href="{{registration_url}}">Registration</a></li>
+                {% endif %}
+            
+        </ul>
+    </nav>
+</div>

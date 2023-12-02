@@ -1,0 +1,229 @@
+{% extends 'seller/base/seller_base.html' %}
+{% load static %}
+{% block seller_panel_title %}
+<title>Product List - Safa World</title>
+{% endblock seller_panel_title %}
+
+
+
+
+
+
+{% block dashboard_body %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-sub-header">
+                    <h3 class="page-title">Products</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'product_list' %}">Products</a></li>
+                        <li class="breadcrumb-item active">All Products</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ---------------------------------Filtering And Search Sectinon------------------------------- -->
+    <div class="student-group-form">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search by ID ...">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search by Name ...">
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search by Phone ...">
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="search-student-btn">
+                    <button type="btn" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table comman-shadow">
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+
+                            <!-- ---------------------------------Product List Heading Sectino Sectinon------------------------------- -->
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select
+                                                name="DataTables_Table_0_length" aria-controls="DataTables_Table_0"
+                                                class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="page-header">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto text-end float-end ms-auto download-grp">
+
+                                                <!-- <a href="students.html" class="btn btn-outline-gray me-2 active"><i
+                                                        class="feather-list"></i></a>
+                                                <a href="students-grid.html" class="btn btn-outline-gray me-2"><i
+                                                        class="feather-grid"></i></a>
+                                                <a href="#" class="btn btn-outline-primary me-2"><i
+                                                        class="fas fa-download"></i>
+                                                    Download</a> -->
+
+                                                <a href="{% url 'add_product' %}" class="btn btn-primary"><i
+                                                        class="fas fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- ---------------------------------Product List Sectino Sectinon------------------------------- -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table
+                                        class="table border-0 star-student table-hover table-center mb-0 datatable table-striped dataTable no-footer"
+                                        id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                        <thead class="student-thread">
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1" aria-sort="ascending"
+                                                    aria-label=": activate to sort column descending"
+                                                    style="width: 22.5px;">
+                                                    <div class="form-check check-tables">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="something">
+                                                    </div>
+                                                </th>
+
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="ID: activate to sort column ascending"  style="width: 4%;"">ID</th>
+
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 56%;">Title</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="DOB: activate to sort column ascending" style="width: 10%;">Price</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Parent Name: activate to sort column ascending"  style="width: 12%;">Discount
+                                                    Price</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Address: activate to sort column ascending"  style="width: 8%;">Quantity
+                                                </th>
+
+                                                <th class="text-end sorting" tabindex="0"
+                                                    aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                                    aria-label="Action: activate to sort column ascending"
+                                                    style="width: 10%; text-align: center;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+
+
+                                            {% for product in product %}
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">
+                                                    <div class="form-check check-tables">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="something">
+                                                    </div>
+                                                </td>
+
+
+                                                <td>{{product.id}}</td>
+
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="{% url 'update_product' product.id %}"
+                                                            class="avatar avatar-sm me-2"><img
+                                                                class="avatar-img rounded-circle"
+                                                                src="{{product.product_image01.url}}"
+                                                                alt="User Image"></a>
+                                                        <a href="{% url 'update_product' product.id %}">{{product.product_title}}</a>
+                                                    </h2>
+                                                </td>
+                                                <td>{{product.current_price}}</td>
+                                                <td>{{product.discount_price}}</td>
+                                                <td>{{product.quantity}}</td>
+
+                                                <td class="text-end">
+                                                    <div class="actions ">
+                                                        <a href="javascript:;"
+                                                            class="btn btn-sm bg-success-light me-2 ">
+                                                            <i class="feather-eye"></i>
+                                                        </a>
+                                                        <a href="{% url 'update_product' product.id %}" class="btn btn-sm bg-danger-light">
+                                                            <i class="feather-edit"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status"
+                                        aria-live="polite">Showing 1 to 10 of 11 entries</div>
+                                </div>
+                                <div class="col-sm-12 col-md-7">
+                                    <div class="dataTables_paginate paging_simple_numbers"
+                                        id="DataTables_Table_0_paginate">
+                                        <ul class="pagination">
+                                            <li class="paginate_button page-item previous disabled"
+                                                id="DataTables_Table_0_previous"><a href="#"
+                                                    aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0"
+                                                    class="page-link">Previous</a></li>
+                                            <li class="paginate_button page-item active"><a href="#"
+                                                    aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0"
+                                                    class="page-link">1</a></li>
+                                            <li class="paginate_button page-item "><a href="#"
+                                                    aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0"
+                                                    class="page-link">2</a></li>
+                                            <li class="paginate_button page-item next" id="DataTables_Table_0_next"><a
+                                                    href="#" aria-controls="DataTables_Table_0" data-dt-idx="3"
+                                                    tabindex="0" class="page-link">Next</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock dashboard_body %}

@@ -1,0 +1,236 @@
+{% extends '../base/base.html' %}
+{% load static %}
+
+{% block title %} Product - A Perfect Online Shop {% endblock title %}
+
+
+{% block body_content %}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            {% if cat %}
+                            <li class="breadcrumb-item active" aria-current="page">{{cat.title}}</li>
+                            {% else %}
+                            <li class="breadcrumb-item active" aria-current="page">All Product</li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="page-main-wrapper">
+    <div class="container">
+        <div class="row">
+            <!-- sidebar start -->
+            <div class="col-lg-3 order-2 order-lg-1">
+                <div class="shop-sidebar-wrap mt-md-28 mt-sm-28">
+                    <!-- sidebar categorie start -->
+                    <div class="sidebar-widget mb-30">
+                        <div class="sidebar-category">
+                            <ul>
+                                <li class="title"><i class="fa fa-bars"></i> categories</li>
+                                {% for categories in categories %}
+                                <li><a
+                                        href="{% url 'category_product' categories.id %}">{{categories.title}}</a><span>({{categories.product.count}})</span>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- sidebar categorie start -->
+
+
+                    <!-- pricing filter start -->
+                    <div class="sidebar-widget mb-30">
+                        <div class="sidebar-title mb-10">
+                            <h3>filter by price</h3>
+                        </div>
+                        <div class="sidebar-widget-body">
+                            <div class="price-range-wrap">
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                    data-min="50" data-max="400">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header"
+                                        style="left: 0%; width: 100%;"></div><span tabindex="0"
+                                        class="ui-slider-handle ui-corner-all ui-state-default"
+                                        style="left: 0%;"></span><span tabindex="0"
+                                        class="ui-slider-handle ui-corner-all ui-state-default"
+                                        style="left: 100%;"></span>
+                                </div>
+                                <div class="range-slider">
+                                    <form action="#" class="d-flex justify-content-between">
+                                        <button class="filter-btn">filter</button>
+                                        <div class="price-input d-flex align-items-center">
+                                            <label for="amount">Price: </label>
+                                            <input type="text" id="amount">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- pricing filter end -->
+
+                    <!-- product size start -->
+                    <div class="sidebar-widget mb-30">
+                        <div class="sidebar-title mb-10">
+                            <h3>size</h3>
+                        </div>
+                        <div class="sidebar-widget-body">
+                            <ul>
+                                <li><i class="fa fa-angle-right"></i><a href="#">s</a><span>(10)</span></li>
+                                <li><i class="fa fa-angle-right"></i><a href="#">m</a><span>(12)</span></li>
+                                <li><i class="fa fa-angle-right"></i><a href="#">l</a><span>(20)</span></li>
+                                <li><i class="fa fa-angle-right"></i><a href="#">XL</a><span>(12)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- product size end -->
+
+
+                    <!-- sidebar banner start -->
+                    <div class="sidebar-widget mb-30">
+                        <div class="img-container fix img-full">
+                            <a href="#"><img src="{% static 'img/banner/banner_shop.jpg' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <!-- sidebar banner end -->
+                </div>
+            </div>
+            <!-- sidebar end -->
+
+            <!-- product main wrap start -->
+            <div class="col-lg-9 order-1 order-lg-2">
+                <div class="shop-banner img-full">
+                    <img src="{% static 'img/banner/banner_static1.jpg' %}" alt="">
+                </div>
+                <!-- product view wrapper area start -->
+                <div class="shop-product-wrapper pt-34">
+                    <!-- shop product top wrap start -->
+                    <div class="shop-top-bar">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-6">
+                                <div class="top-bar-left">
+                                    <div class="product-amount">
+                                        <p>Showing 1–16 of 21 results</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-6">
+                                <div class="top-bar-right">
+                                    <div class="product-short">
+                                        <p>Sort By : </p>
+                                        <div class="nice-select" tabindex="0"><span class="current">Relevance</span>
+                                            <ul class="list">
+                                                <li data-value="trending" class="option selected">Relevance</li>
+
+                                                <a href="?filter=low"><li data-value="rating" class="option">Price (Low &gt; High)</li></a>
+                                                
+                                                
+                                                <a href="?filter=high"><li data-value="rating" class="option">Price (High &gt; Low)</li></a>
+                                                
+                                                
+                                                
+                                                <!-- <li data-value="date" class="option">Rating (Lowest)</li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- shop product top wrap start -->
+
+                    <!-- product item start -->
+                    <div class="shop-product-wrap grid row">
+
+                        {% for products in products %}
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <!-- product single grid item start -->
+                            <div class="product-item fix mb-30">
+                                <div class="product-thumb">
+                                    <a href="{% url 'product_details' products.product_slug %}">
+                                        <img src="{{products.product_image01.url}}" class="img-pri" alt="">
+
+                                        {% if products.product_image2 %}
+                                        <img src="{{products.product_image2.url}}" class="img-sec" alt="">
+                                        {% else %}
+                                        <img src="{{products.product_image1.url}}" class="img-sec" alt="">
+                                        {% endif %}
+
+                                    </a>
+                                    <div class="product-label">
+                                        <span>hot</span>
+                                    </div>
+                                    <div class="product-action-link">
+                                        <a href="#" data-toggle="modal" data-target="#quick_view"> <span
+                                                data-toggle="tooltip" data-placement="left" title=""
+                                                data-original-title="Quick view"><i class="fa fa-search"></i></span>
+                                        </a>
+                                        <a href="#" data-toggle="tooltip" data-placement="left" title=""
+                                            data-original-title="Wishlist"><i class="fa fa-heart-o"></i></a>
+                                        <a href="#" data-toggle="tooltip" data-placement="left" title=""
+                                            data-original-title="Compare"><i class="fa fa-refresh"></i></a>
+
+
+                                        <a href="{% url 'add_to_cart' products.id %}" data-toggle="tooltip" data-placement="left" title=""
+                                            data-original-title="Add to cart"><i class="fa fa-shopping-cart"></i></a>
+
+
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <h4><a href="{% url 'product_details' products.product_slug %}">{{products.product_title|truncatewords:7}}</a></h4>
+                                    <div class="pricebox">
+                                        <span class="regular-price"><del>{{products.current_price}}</del></span> <span
+                                            class="regular-price">{{products.discount_price}}</span>
+                                        <div class="ratings">
+                                            <span class="good"><i class="fa fa-star"></i></span>
+                                            <span class="good"><i class="fa fa-star"></i></span>
+                                            <span class="good"><i class="fa fa-star"></i></span>
+                                            <span class="good"><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <div class="pro-review">
+                                                <span>1 review(s)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- product single grid item end -->
+                        </div> <!-- product single column end -->
+                        {% endfor %}
+
+                    </div>
+                    <!-- product item end -->
+
+
+
+
+                </div>
+                <!-- product view wrapper area end -->
+
+
+
+                
+                {% include './paginator.html' %}
+
+
+            </div>
+            <!-- product main wrap end -->
+        </div>
+    </div>
+</div>
+
+
+{% endblock body_content %}

@@ -1,0 +1,138 @@
+{% load static %}
+
+<div class="header">
+
+    <div class="header-left">
+        <a href="{% url 'admin_panel' %}" class="logo">
+            <img src="{% static 'seller/img/logo.jpg' %}" alt="Logo">
+        </a>
+        <a href="{% url 'admin_panel' %}" class="logo logo-small">
+            <img src="{% static 'seller/img/logo.jpg' %}" alt="Logo" width="30" height="30">
+        </a>
+    </div>
+    <div class="menu-toggle">
+        <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fas fa-bars"></i>
+        </a>
+    </div>
+
+    <div class="top-nav-search">
+        <form>
+            <input type="text" class="form-control" placeholder="Search here">
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <a class="mobile_btn" id="mobile_btn">
+        <i class="fas fa-bars"></i>
+    </a>
+
+    <ul class="nav user-menu">
+        <li class="nav-item dropdown noti-dropdown language-drop me-2">
+            <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
+                <i class="fa fa-language" style="color: black;"></i>
+            </a>
+            <div class="dropdown-menu ">
+                <div class="noti-content">
+                    <div>
+                        <a class="dropdown-item" href="javascript:;"><i
+                                class="flag flag-lr me-2"></i>English</a>
+                        <a class="dropdown-item" href="javascript:;"><i
+                                class="flag flag-bl me-2"></i>Francais</a>
+                        <a class="dropdown-item" href="javascript:;"><i class="flag flag-cn me-2"></i>Turkce</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown noti-dropdown me-2">
+            <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
+                <i class="fa fa-bell" style="color: black;"></i>
+            </a>
+            <div class="dropdown-menu notifications">
+                <div class="topnav-dropdown-header">
+                    <span class="notification-title">Notifications</span>
+                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                </div>
+                <div class="noti-content">
+                    <ul class="notification-list">
+                        <li class="notification-message">
+                            <a href="#">
+                                <div class="media d-flex">
+                                    <span class="avatar avatar-sm flex-shrink-0">
+                                            <i class="fa fa-bell" style="color: black;" class="avatar-img rounded-circle"></i>
+                                    </span>
+                                    <div class="media-body flex-grow-1">
+                                        <p class="noti-details"><span class="noti-title">Carlson Tech</span> has
+                                            approved <span class="noti-title">your estimate</span></p>
+                                        <p class="noti-time"><span class="notification-time">4 mins ago</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="notification-message">
+                            <a href="#">
+                                <div class="media d-flex">
+                                    <span class="avatar avatar-sm flex-shrink-0">
+                                        <i class="fa fa-bell" style="color: black;" class="avatar-img rounded-circle"></i>
+                                    </span>
+                                    <div class="media-body flex-grow-1">
+                                        <p class="noti-details"><span class="noti-title">International Software
+                                                Inc</span> has sent you a invoice in the amount of <span
+                                                class="noti-title">$218</span></p>
+                                        <p class="noti-time"><span class="notification-time">6 mins ago</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="topnav-dropdown-footer">
+                    <a href="#">View all Notifications</a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item zoom-screen me-2">
+            <a href="#" class="nav-link header-nav-list win-maximize">
+                <i class="fa fa-expand" style="color: black;"></i>
+            </a>
+        </li>
+
+        <li class="nav-item dropdown has-arrow new-user-menus">
+            <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                <span class="user-img">
+                        <i class="fa fa-user" class="rounded-circle" style="color: black; width: 31px;"></i>
+                    <div class="user-text">
+                        <h6>{{request.user.seller.shop_name|title}}</h6>
+                        <!-- <h6>{{seller.shop_name|title}}</h6> -->
+                        <p class="text-muted mb-0">{% if request.user.is_seller == True %}Seller{% else %} Staff {% endif %}</p>
+                    </div>
+                </span>
+            </a>
+            <div class="dropdown-menu">
+                <div class="user-header">
+                    <div class="avatar avatar-sm">
+                        <i class="fa fa-user" class="rounded-circle" style="color: black; width: 31px;"></i>
+                    </div>
+                    <div class="user-text">
+                        
+                        <h6>{{request.user.seller.shop_name|title}}</h6>
+
+                        {% if request.user.is_seller == True %}
+                        <p class="text-muted mb-0">Seller</p>
+                        {% else %}
+                        <p class="text-muted mb-0">Staff</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <a class="dropdown-item" href="">My Profile</a>
+                <a class="dropdown-item" href="">Inbox</a>
+                <a class="dropdown-item" href="{% url 'seller_logout' %}">Logout</a>
+            </div>
+        </li>
+
+    </ul>
+
+</div>

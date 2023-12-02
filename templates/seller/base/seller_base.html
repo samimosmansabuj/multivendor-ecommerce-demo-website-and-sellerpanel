@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+    {% block seller_panel_title %}
+    <title>Base</title>
+    {% endblock seller_panel_title %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/6965595432.js" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" href="{% static 'seller/img/logo.jpg' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'seller/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'seller/plugins/feather/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'seller/plugins/icons/flags/flags.css' %}">
+    <link rel="stylesheet" href="{% static 'seller/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'seller/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'seller/css/style.css' %}">
+</head>
+
+<body style="background-color: #cfcfde;">
+
+    <div class="main-wrapper">
+
+        {% include './header.html' %}
+
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+
+
+                        {% include './sidebar-main-menu.html' %}
+
+
+                        <!-- {% include './sidebar-management-menu.html' %} -->
+
+
+                        <li>
+                            <a href="{% url 'seller_logout' %}"><i class="fas fa-cog"></i> <span>Logout</span></a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page-wrapper">
+
+
+            {% block dashboard_body %}
+            <h1>This is base page body</h1>
+            {% endblock dashboard_body %}
+
+
+
+
+            <footer>
+                <p>Copyright © 2022 Dreamguys.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="{% static 'seller/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'seller/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'seller/js/feather.min.js' %}"></script>
+    <script src="{% static 'seller/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'seller/plugins/apexchart/apexcharts.min.js' %}"></script>
+    <script src="{% static 'seller/plugins/apexchart/chart-data.js' %}"></script>
+    <script src="{% static 'seller/js/script.js' %}"></script>
+</body>
+
+</html>

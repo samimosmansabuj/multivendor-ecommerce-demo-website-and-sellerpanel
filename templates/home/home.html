@@ -1,0 +1,185 @@
+{% extends '../base/base.html' %}
+{% load static %}
+
+{% block title %} Home - A Perfect Online Shop {% endblock title %}
+
+
+{% block nav_category %}
+<div class="category-toggle">
+    category
+    <div class="cat-icon">
+        <i class="fa fa-angle-down"></i>
+    </div>
+</div>
+
+
+<nav class="category-menu hm-1">
+    <ul>
+        {% for categories in categories %}
+        <li class="menu-item-has-children">
+            <a href="{% url 'category_product' categories.id %}">{{categories.title|title}}</a>
+            <!-- Mega Category Menu Start -->
+            <ul class="category-mega-menu">
+                {% for sub_cat in categories.sub_categories.all %}
+                <li class="menu-item-has-children">
+                    <a href="">{{sub_cat.title|title}}</a>
+                </li>
+                {% endfor %}
+            </ul><!-- Mega Category Menu End -->
+        </li>
+        {% endfor %}
+
+    </ul>
+</nav>
+{% endblock nav_category %}
+
+
+{% block body_content %}
+
+<!-- hero slider start -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="slider-wrapper-area">
+                <div
+                    class="hero-slider-active hero__1 slick-dot-style hero-dot slick-initialized slick-slider slick-dotted">
+                    <div class="slick-list draggable">
+                        <div class="slick-track" style="opacity: 1; width: 1682px;">
+                            <div class="single-slider slick-slide slick-current slick-active"
+                                style="background-image: url(&quot;{% static 'img/slider/slider11_bg.jpg' %}&quot;); width: 811px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;"
+                                data-slick-index="0" aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide00"
+                                aria-describedby="slick-slide-control00">
+                                <div class="container p-0">
+                                    <div class="slider-main-content">
+                                        <div class="slider-content-img">
+                                            <img src="{% static 'img/slider/slider11_lable1.png' %}" alt="">
+                                            <img src="{% static 'img/slider/slider11_lable2.png' %}" alt="">
+                                            <img src="{% static 'img/slider/slider11_lable3.png' %}" alt="">
+                                        </div>
+                                        <div class="slider-text">
+                                            <div class="slider-label">
+                                                <img src="{% static 'img/slider/slider11_lable4.png' %}" alt="">
+                                            </div>
+                                            <h1>headphones az12</h1>
+                                            <p>Typi Non Habent Claritatem Insitam; Est Usus Legentis</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-slider slick-slide"
+                                style="background-image: url(&quot;{% static 'img/slider/slider12_bg.jpg' %}&quot;); width: 811px; position: relative; left: -841px; top: 0px; z-index: 998; opacity: 0;"
+                                data-slick-index="1" aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide01"
+                                aria-describedby="slick-slide-control01">
+                                <div class="container p-0">
+                                    <div class="slider-main-content">
+                                        <div class="slider-content-img">
+                                            <img src="{% static 'img/slider/slider11_lable1.png' %}" alt="">
+                                            <img src="{% static 'img/slider/slider11_lable2.png' %}" alt="">
+                                            <img src="{% static 'img/slider/slider11_lable3.png' %}" alt="">
+                                        </div>
+                                        <div class="slider-text">
+                                            <div class="slider-label">
+                                                <img src="{% static 'img/slider/slider11_lable4.png' %}" alt="">
+                                            </div>
+                                            <h1>samson s90</h1>
+                                            <p>Typi Non Habent Claritatem Insitam; Est Usus Legentis</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="slick-dots" style="" role="tablist">
+                        <li class="slick-active" role="presentation"><button type="button" role="tab"
+                                id="slick-slide-control00" aria-controls="slick-slide00" aria-label="1 of 2"
+                                tabindex="0" aria-selected="true">1</button></li>
+                        <li role="presentation"><button type="button" role="tab" id="slick-slide-control01"
+                                aria-controls="slick-slide01" aria-label="2 of 2" tabindex="-1">2</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- hero slider end -->
+
+<hr>
+
+<div class="container">
+    <h1 style="text-align: center;">All Products</h1>
+    <div class="shop-product-wrap row grid">
+
+
+    {% for products in products %}
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <!-- product single grid item start -->
+            <div class="product-item fix mb-30">
+                <div class="product-thumb">
+                    <a href="{% url 'product_details' products.product_slug %}">
+                        <img src="{{products.product_image01.url}}" class="img-pri" alt="">
+                        <img src="{{products.product_image01.url}}" class="img-sec" alt="">
+                    </a>
+                    <div class="product-label">
+                        <span>hot</span>
+                    </div>
+                    <div class="product-action-link">
+                        <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
+                                data-placement="left" title="" data-original-title="Quick view"><i
+                                    class="fa fa-search"></i></span> </a>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title=""
+                            data-original-title="Wishlist"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title=""
+                            data-original-title="Compare"><i class="fa fa-refresh"></i></a>
+
+                        <a href="{% url 'add_to_cart' products.id %}" data-toggle="tooltip" data-placement="left" title=""
+                            data-original-title="Add to cart"><i class="fa fa-shopping-cart"></i></a>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h4><a href="{% url 'product_details' products.product_slug %}">{{products.product_title}}</a></h4>
+                    <div class="pricebox">
+                        <del><span class="regular-price">{{products.current_price}} BDT</span></del> <span class="regular-price">{{products.discount_price}} BDT</span>
+                        <div class="ratings">
+                            <span class="good"><i class="fa fa-star"></i></span>
+                            <span class="good"><i class="fa fa-star"></i></span>
+                            <span class="good"><i class="fa fa-star"></i></span>
+                            <span class="good"><i class="fa fa-star"></i></span>
+                            <span><i class="fa fa-star"></i></span>
+                            <div class="pro-review">
+                                <span>1 review(s)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- product single grid item end -->
+        </div> <!-- product single column end -->
+    {% endfor %}
+
+
+    </div>
+
+
+    <div class="paginatoin-area text-center pt-28">
+        <div class="row">
+            <div class="col-12">
+                <ul class="pagination-box">
+                    <li><a class="Previous" href="#">Previous</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a class="Next" href="#"> Next </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<hr>
+
+
+
+{% endblock body_content %}

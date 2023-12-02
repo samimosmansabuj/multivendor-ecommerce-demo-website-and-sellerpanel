@@ -1,0 +1,216 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Order ID#{{order.order_id}} - A Perfect Online Shop
+{% endblock title %}
+
+
+{% block body_content %}
+<!-- breadcrumb area start -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'my_account' %}">My Account</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Order#{{order.order_id}}
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb area end -->
+
+<!-- my account wrapper start -->
+<div class="my-account-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- My Account Page Start -->
+                <div class="myaccount-page-wrapper">
+                    <!-- My Account Tab Menu Start -->
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-4">
+                            <div class="myaccount-tab-menu nav" role="tablist">
+                                <a href="{% url 'my_account' %}"><i class="fa fa-dashboard"></i>
+                                    Dashboard</a>
+                                <a href="{% url 'my_account' %}"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                                <a href="{% url 'my_account' %}"><i class="fa fa-cloud-download"></i> Download</a>
+                                <a href="{% url 'my_account' %}"><i class="fa fa-credit-card"></i> Payment
+                                    Method</a>
+                                <a href="{% url 'my_account' %}"><i class="fa fa-map-marker"></i> address</a>
+                                <a href="{% url 'my_account' %}"><i class="fa fa-user"></i> Account Details</a>
+                                <a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </div>
+                        </div>
+                        <!-- My Account Tab Menu End -->
+
+
+
+                        <!-- View Order Code Start -->
+                        <style>
+                            .invoice-title h2,
+                            .invoice-title h3 {
+                                display: inline-block;
+                            }
+
+                            .table>tbody>tr>.no-line {
+                                border-top: none;
+                            }
+
+                            .table>thead>tr>.no-line {
+                                border-bottom: none;
+                            }
+
+                            .table>tbody>tr>.thick-line {
+                                border-top: 2px solid;
+                            }
+                        </style>
+                        <div class="col-lg-9 col-md-8">
+
+                            <!------ Include the above in your HEAD tag ---------->
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="invoice-title">
+                                            <h2>Invoice</h2>
+                                            <h3 class="pull-right">Order # {{order.order_id}}</h3>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <address>
+                                                    <strong>Billed To:</strong><br>
+                                                    {{order.first_name}} {{order.last_name}}<br>
+                                                    {{order.address}}
+                                                    <!-- 1234 Main<br>
+                                                    Apt. 4B<br>
+                                                    Springfield, ST 54321 -->
+                                                </address>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <address>
+                                                    <strong>Shipped To:</strong><br>
+                                                    {{order.first_name}} {{order.last_name}}<br>
+                                                    {{order.address}}
+                                                    <!-- 1234 Main<br>
+                                                    Apt. 4B<br>
+                                                    Springfield, ST 54321 -->
+                                                </address>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <address>
+                                                    <strong>Payment Method:</strong><br>
+                                                    {% if order.paid == False %}
+                                                    <!-- Visa ending **** 4242<br> -->
+                                                    Cash On Delivery<br>
+                                                    {% else %}
+                                                    Online Payment<br>
+                                                    {% endif %}
+                                                    {{order.email}}
+                                                </address>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <address>
+                                                    <strong>Order Date:</strong><br>
+                                                    {{order.order_date}}<br><br>
+                                                </address>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title"><strong>Order summary</strong></h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-condensed">
+                                                        <thead>
+                                                            <tr>
+                                                                <td><strong>Item</strong></td>
+                                                                <td class="text-center"><strong>Price</strong></td>
+                                                                <td class="text-center"><strong>Quantity</strong></td>
+                                                                <td class="text-right"><strong>Totals</strong></td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                                            {% for orderitems in orderitems %}
+                                                            <tr>
+                                                                <td>{{orderitems.product.product_title}}</td>
+                                                                <td class="text-center">
+                                                                    {{orderitems.product.discount_price}}</td>
+                                                                <td class="text-center">{{orderitems.quantity}}</td>
+                                                                <td class="text-right">{{orderitems.total_price}}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                            <tr>
+                                                                <td class="thick-line"></td>
+                                                                <td class="thick-line"></td>
+                                                                <td class="thick-line text-center">
+                                                                    <strong>Subtotal</strong>
+                                                                </td>
+                                                                <td class="thick-line text-right">{{order.total_amount}}
+                                                                    BDT</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="no-line"></td>
+                                                                <td class="no-line"></td>
+                                                                <td class="no-line text-center">
+                                                                    <strong>Shipping</strong>
+                                                                </td>
+                                                                <td class="no-line text-right">Free Shipping</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="no-line"></td>
+                                                                <td class="no-line"></td>
+                                                                <td class="no-line text-center"><strong>Total</strong>
+                                                                </td>
+                                                                <td class="no-line text-right">{{order.total_amount}}
+                                                                    BDT</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <hr>
+                            <a class="btn btn-primary" href="{% url 'download_invoice' order.order_id %}" target="_blank">Download Invoice</a>
+                        </div>
+
+                        <!-- View Order Code Start -->
+                        
+
+
+
+                    </div>
+                </div> <!-- My Account Page End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- my account wrapper end -->
+<hr>
+{% endblock body_content %}

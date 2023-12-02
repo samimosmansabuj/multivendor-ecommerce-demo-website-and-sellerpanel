@@ -1,0 +1,55 @@
+{% load static %}
+<div class="header-middle-right">
+
+    <div class="header-middle-block" style="margin-bottom: 5px;">
+        <div class="header-middle-searchbox">
+            <input type="text" placeholder="Search..." style="height: 50px;">
+            <button class="search-btn" style="height: 50px;"><i
+                    class="fa fa-search"></i></button>
+        </div>
+        <div class="header-mini-cart">
+            <div class="mini-cart-btn">
+                <i class="fa fa-shopping-cart"></i>
+                {% if request.user.is_authenticated %}
+                <span class="cart-notification">{{quickcart.count}}</span>
+                {% endif %}
+            </div>
+            <div class="cart-total-price">
+                <span>total</span>
+                {{cart_total}}
+            </div>
+            <ul class="cart-list">
+                {% if request.user.is_authenticated %}
+                
+                {% for cart in quickcart %}
+                <li>
+                    <div class="cart-img">
+                        <a href="{% url 'product_details' cart.product.product_slug %}"><img
+                                src="{{cart.product.product_image01.url}}" alt=""></a>
+                    </div>
+                    <div class="cart-info">
+                        <h4><a href="{% url 'product_details' cart.product.product_slug %}">{{cart.product.product_title}}</a></h4>
+                        <span>{{cart.product.discount_price}} BDT x {{cart.quantity}}</span>
+                    </div>
+
+                    <div class="del-icon">
+                        <a href="{% url 'remove_cart' cart.id %}">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+
+                {% endif %}
+
+                <li class="mini-cart-price">
+                    <span class="subtotal">subtotal : </span>
+                    <span class="subtotal-price">{{cart_total}} BDT</span>
+                </li>
+                <li class="checkout-btn">
+                    <a href="{% url 'check_out' %}">checkout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

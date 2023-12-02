@@ -1,0 +1,182 @@
+{% extends 'seller/base/seller_base.html' %}
+{% block seller_panel_title %}
+<title>Add Product - Safa World</title>
+{% endblock seller_panel_title %}
+
+
+{% block dashboard_body %}
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row">
+            <div class="col">
+                <h3 class="page-title">Add Product</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'admin_panel' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Add Product</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Basic Inputs</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+<!-- --------------------Product Title And Quanity Section------------------------------------------------ -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Product Title</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" name="product_title">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Quantity</label>
+                                        <div class="col-md-12">
+                                            <input type="number" class="form-control" name="quantity">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!-- --------------------Category And Sub Category Section------------------------------------------------ -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Category</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control form-select" name="category">
+                                                <option>-- Select --</option>
+                                                {% for categories in categories %}
+                                                <option>{{categories.title|title}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Sub-Category</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control form-select" name="sub_category">
+                                                <option>-- Select --</option>
+                                            {% for sub_categories in sub_categories %}
+                                                <option>{{sub_categories.title|title}}</option>
+                                            {% endfor %}
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!-- --------------------Short and Product Details Section------------------------------------------------ -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Short Descriptino</label>
+                                        <div class="col-md-12">
+                                            <textarea rows="5" cols="5" class="form-control"
+                                                placeholder="Product Short Descriptino" name="short_description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">Product Details</label>
+                                        <div class="col-md-12">
+                                            <textarea rows="5" cols="5" class="form-control"
+                                                placeholder="Product Details" name="product_details"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!-- --------------------Image And Price Section------------------------------------------------ -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-4">File Input</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control" type="file" name="product_image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="form-group mb-0 row">
+                                        <label class="col-form-label col-md-4">Current Price</label>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                                <span class="input-group-text">BDT</span>
+                                                <input class="form-control" type="number" name="current_price">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="form-group mb-0 row">
+                                        <label class="col-form-label col-md-4">Discount Price</label>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                                <span class="input-group-text">BDT</span>
+                                                <input class="form-control" type="number" name="discount_price">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <button type="submit" class="btn btn-primary">Add Product</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+{% endblock dashboard_body %}

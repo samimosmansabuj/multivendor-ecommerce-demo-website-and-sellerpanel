@@ -1,0 +1,80 @@
+{% load static %}
+{% url 'admin_panel' as admin_panel_url %}
+{% url 'add_product' as add_product_url %}
+{% url 'product_list' as product_list_url %}
+
+{% url 'order_list' as order_list_url %}
+
+
+{% url 'add_teacher' as add_teacher_url %}
+{% url 'students' as students_list_url %}
+{% url 'department_list' as department_list_url %}
+{% url 'add_department' as add_department_url %}
+
+{% url 'fees_collect' as fees_collect_url %}
+
+
+<li class="menu-title">
+    <span>Main Menu</span>
+</li>
+
+
+<li class="submenu active">
+    <a href="{{home_url}}"><i class="feather-grid"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
+    <ul>
+        <li><a href="{{admin_panel_url}}" {% if request.path == admin_panel_url %} class="active" {% endif %}>Admin
+                Dashboard</a></li>
+        <li><a href="{{admin_panel_url}}">Seller</a></li>
+        <li><a href="{{admin_panel_url}}">Staff</a></li>
+    </ul>
+</li>
+
+
+<li class="submenu">
+    <a href="#"><i class="fas fa-graduation-cap"></i> <span> Product</span> <span class="menu-arrow"></span></a>
+    <ul>
+        <li><a href="{{product_list_url}}" {% if request.path == product_list_url %} class="active"{% endif %}>Product List</a></li>
+        <li><a href="{{add_product_url}}" {% if request.path == add_product_url %} class="active"{% endif %}>Add Product</a></li>
+
+        <!-- <li><a href="edit-student.html">Student Edit</a></li> -->
+        <!-- <li><a href="student-details.html">Student View</a></li> -->
+    </ul>
+</li>
+
+
+<li class="submenu">
+    <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Order</span> <span class="menu-arrow"></span></a>
+    <ul>
+        <li><a href="{{order_list_url}}" {% if request.path == order_list_url %} class="active"{% endif %}>Order</a></li>
+        <li><a href="{{order_list_url}}">Manage Review</a></li>
+
+
+        <!-- <li><a href="edit-teacher.html">Teacher Edit</a></li> -->
+        <!-- <li><a href="teacher-details.html">Teacher View</a></li> -->
+    </ul>
+</li>
+
+<li class="submenu">
+    <a href="#"><i class="fas fa-book-reader"></i> <span> Seller Tools</span> <span class="menu-arrow"></span></a>
+    <ul>
+        <li><a href="{{admin_panel_url}}">Campaing</a></li>
+        <li><a href="{{admin_panel_url}}">Free Shipping</a></li>
+        <li><a href="{{admin_panel_url}}">Coupon</a></li>
+    </ul>
+</li>
+
+<li class="submenu">
+    <a href="#"><i class="fas fa-book-reader"></i> <span> Finance</span> <span class="menu-arrow"></span></a>
+    <ul>
+        <li><a href="{{admin_panel_url}}">Account Statement</a></li>
+    </ul>
+</li>
+
+<li class="submenu">
+    <a href="#"><i class="fas fa-building"></i> <span> Account & Setting</span> <span class="menu-arrow"></span></a>
+    <ul>
+        <li><a href="{{admin_panel_url}}">Profile</a></li>
+        <li><a href="{{add_department_url}}">Department Add</a></li>
+        <!-- <li><a href="{{department_list_url}}">Department Edit</a></li> -->
+    </ul>
+</li>

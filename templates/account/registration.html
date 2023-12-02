@@ -1,0 +1,118 @@
+{% extends '../base/base.html' %}
+{% load static %}
+
+{% block title %}
+Registration - A Perfect Online Shop
+{% endblock title %}
+
+
+{% block body_content %}
+<!-- breadcrumb area start -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Registration</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb area end -->
+
+<!-- login register wrapper start -->
+<div class="login-register-wrapper">
+    <div class="container">
+        <div class="member-area-from-wrap">
+            <div class="row">
+
+                <!-- Register Content Start -->
+                <div class="col-lg-6" style="margin: auto;">
+                    <div class="login-reg-form-wrap mt-md-34 mt-sm-34">
+                        <h2 style="text-align: center;">Account Registration</h2>
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="Enter First Name" name="first_name" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="Enter Last Name" name="last_name" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="Enter Username" name="username" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single-input-item">
+                                        <input type="number" placeholder="Enter Phone Number" name="phone_number" required />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="single-input-item">
+                                <input type="email" placeholder="Enter your Email" name="email" required />
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="single-input-item">
+                                        <input type="password" placeholder="Enter your Password" name="password" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single-input-item">
+                                        <input type="password" placeholder="Repeat your Password" name="re_password" required />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="single-input-item">
+                                <div class="login-reg-form-meta">
+                                    <div class="remember-meta">
+                                        <div class="custom-control">
+                                            <p class="custom-control-label">Already you have an account!  <a href="{% url 'login' %}"> Login</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-input-item">
+                                <div class="login-reg-form-meta">
+                                    <div class="remember-meta">
+                                        <div class="custom-control">
+                                            <p class="custom-control-label">You Forget You Account Password!  <a href=""> Forget Password</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="single-input-item">
+                                <button type="submit" class="sqr-btn">Registration</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Register Content End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- login register wrapper end -->
+{% endblock body_content %}

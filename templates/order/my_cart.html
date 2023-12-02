@@ -1,0 +1,132 @@
+{% extends '../base/base.html' %}
+{% load static %}
+
+{% block title %} My Cart - A Perfect Online Shop {% endblock title %}
+
+
+{% block body_content %}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}">shop</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">cart</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="cart-main-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Cart Table Area -->
+                <div class="cart-table table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="pro-thumbnail">Thumbnail</th>
+                                <th class="pro-title">Product</th>
+                                <th class="pro-price">Price</th>
+                                <th class="pro-quantity">Quantity</th>
+                                <th class="pro-subtotal">Total</th>
+                                <th class="pro-remove">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for my_cart in my_cart %}
+                            <tr>
+                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
+                                            src="{{my_cart.product.product_image01.url}}" alt="Product"></a></td>
+                                <td class="pro-title"><a href="#">{{my_cart.product.product_title}}</a></td>
+                                <td class="pro-price"><span>{{my_cart.product.discount_price}}</span></td>
+
+                                <td class="pro-quantity">
+                                    <div>
+                                        <form method="POST"> {% csrf_token %}
+                                            <button name="add" value="{{my_cart.id}}"
+                                                style="border: none;background: transparent;">+</button>
+
+                                            <input type="number" value="{{my_cart.quantity}}"
+                                                style="width: 40%;text-align: center;font-weight: bold;border: 3px black solid;"
+                                                disabled readonly>
+
+                                            <button name="minus" value="{{my_cart.id}}"
+                                                style="border: none;background: transparent;">-</button>
+                                        </form>
+                                    </div>
+                                </td>
+
+                                <td class="pro-subtotal"><span>{% widthratio my_cart.product.discount_price 1 my_cart.quantity %}</span></td>
+                                <td class="pro-remove"><a href="{% url 'remove_cart' my_cart.id %}"><i
+                                            class="fa fa-trash-o"></i></a></td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                    {% if not my_cart %}
+                    <div style="margin: auto;text-align: center;padding: 50px;">
+                        <h4>Cart Empty</h4>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Cart Update Option -->
+                <div class="cart-update-option d-block d-md-flex justify-content-between">
+                    <div class="apply-coupon-wrapper">
+                        <form method="POST" class=" d-block d-md-flex">
+                            <input type="text" placeholder="Enter Your Coupon Code" required="">
+                            <button class="sqr-btn">Apply Coupon</button>
+                        </form>
+                    </div>
+                    <div class="cart-update mt-sm-16">
+                        <a href="#" class="sqr-btn">Update Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-5 ml-auto">
+                <!-- Cart Calculation Area -->
+                <div class="cart-calculator-wrapper">
+                    <div class="cart-calculate-items">
+                        <h3>Cart Totals</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Sub Total</td>
+                                        <td>{{cart_total}} BDT</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr class="total">
+                                        <td>Total</td>
+                                        <td class="total-amount">{{cart_total}} BDT</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="{% url 'check_out' %}" class="sqr-btn d-block">Proceed To Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+{% endblock body_content %}

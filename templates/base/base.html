@@ -1,0 +1,339 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+
+    <!-- Site title -->
+    <title>{% block title %} Base {% endblock title %}</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/logo.jpg' %}" type="image/x-icon" />
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- helper class css -->
+    <link href="{% static 'css/helper.min.css' %}" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="{% static 'css/plugins.css' %}" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/skin-default.css' %}" rel="stylesheet" id="galio-skin">
+</head>
+
+<body class="layout-boxed image-bg" style="background-image: url(&quot;/static/img/bg-panel/bg-img/04.jpg&quot;);">
+
+    <!-- color switcher start -->
+    <div class="color-switcher">
+        <div class="color-switcher-inner">
+            <div class="switcher-icon">
+                <i class="fa fa-cog fa-spin"></i>
+            </div>
+
+
+            <div class="switcher-panel-item">
+                <h3>Layout Style</h3>
+                <ul class="nav layout-changer">
+                    <li><button class="btn-layout-changer" data-layout="wide">Wide</button></li>
+                    <li><button class="btn-layout-changer active" data-layout="boxed">Boxed</button></li>
+                </ul>
+            </div>
+
+            <div class="switcher-panel-item bg">
+                <h3>Background Image</h3>
+                <ul class="nav flex-wrap bgbody-style bg-img">
+                    <li><img src="{% static 'img/bg-panel/bg-img/03.jpg' %}" alt="Images"></li>
+                    <li><img src="{% static 'img/bg-panel/bg-img/04.jpg' %}" alt="Images"></li>
+                    <li><img src="{% static 'img/bg-panel/bg-img/05.jpg' %}" alt="Images"></li>
+                    <li><img src="{% static 'img/bg-panel/bg-img/06.jpg' %}" alt="Images"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- color switcher end -->
+
+
+    <div class="wrapper">
+        <!-- header area start -->
+        <header>
+
+            <!-- header top start -->
+            <div class="header-top-area bg-gray text-center text-md-left">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-5">
+                            <div class="header-call-action">
+                                <a href="#">
+                                    <i class="fa fa-envelope"></i>
+                                    info@website.com
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-phone"></i>
+                                    0123456789
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-7">
+                            <div class="header-top-right float-md-right float-none">
+                                <nav>
+                                    <ul>
+                                        <li>
+                                            <div class="dropdown header-top-dropdown">
+                                                <a class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    My Account
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="myaccount">
+                                                    {% if request.user.is_authenticated and request.user.is_customer == True %}
+                                                    <a class="dropdown-item" href="{% url 'my_account' %}"> My Account</a>
+                                                    <a class="dropdown-item" href="{% url 'logout' %}"> Logout</a>
+                                                    
+                                                    {% else %}
+                                                    <a class="dropdown-item" href="{% url 'login' %}"> login</a>
+                                                    <a class="dropdown-item" href="{% url 'registration' %}">register</a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'admin_panel' %}">Seller</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">my wishlist</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'my_cart' %}">my cart</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'check_out' %}">checkout</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header top end -->
+
+            <!-- header middle start -->
+            <div class="header-middle-area pt-20 pb-20">
+                <div class="container">
+                    <div class="row align-items-center">
+
+                        <!-- start logo area -->
+                        <div class="col-lg-3" style="height: 50px; margin-bottom: 5px;">
+                            <div class="brand-logo">
+                                <a href="{% url 'home' %}">
+                                    <img src="{% static 'img/logo/logo.jpg' %}" alt="brand logo" style="height: 50px;">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- end logo area -->
+
+                        <div class="col-lg-9">
+
+
+                            {% include './quick_cart.html' %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header middle end -->
+
+            <!-- main menu area start -->
+            <div class="main-header-wrapper bdr-bottom1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="main-header-inner">
+                                <div class="category-toggle-wrap">
+
+
+                                    {% block nav_category %}
+                                    <div class="category-toggle">
+                                        category
+                                        <div class="cat-icon">
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                    </div>
+
+
+                                    <nav class="category-menu category-style-2">
+                                        <ul>
+                                            
+                                            {% for categories in categories %}
+                                            <li class="menu-item-has-children">
+                                                <a href="{% url 'category_product' categories.id %}">{{categories.title|title}}</a>
+                                                <!-- Mega Category Menu Start -->
+                                                <ul class="category-mega-menu">
+                                                    {% for sub_cat in categories.sub_categories.all %}
+                                                    <li class="menu-item-has-children">
+                                                        <a href="">{{sub_cat.title|title}}</a>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul><!-- Mega Category Menu End -->
+                                            </li>
+                                            {% endfor %}
+
+                                        </ul>
+                                    </nav>
+                                    {% endblock nav_category %}
+
+                                </div>
+
+                                <!-- Header main-menu Section Start  -->
+                                {% include './header_nav_bar.html' %}
+                                <!-- Header main-menu Section Start  -->
+
+
+                            </div>
+                        </div>
+                        <div class="col-12 d-block d-lg-none">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- main menu area end -->
+
+        </header>
+        <!-- header area end -->
+
+        {% block body_content %}
+        <h1>This is base page body content</h1>
+        {% endblock body_content %}
+
+
+        <!-- footer area start -->
+        {% include './footer.html' %}
+        <!-- footer area end -->
+
+    </div>
+
+
+    <!-- Quick view modal start -->
+    <div class="modal" id="quick_view">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- product details inner end -->
+                    <div class="product-details-inner">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="product-large-slider slick-arrow-style_2 mb-20">
+                                    <div class="pro-large-img">
+                                        <img src="{% static 'img/product/product-details-img1.jpg' %}" alt="" />
+                                    </div>
+                                    <div class="pro-large-img">
+                                        <img src="{% static 'img/product/product-details-img2.jpg' %}" alt="" />
+                                    </div>
+                                    <div class="pro-large-img">
+                                        <img src="{% static 'img/product/product-details-img3.jpg' %}" alt="" />
+                                    </div>
+                                    <div class="pro-large-img">
+                                        <img src="{% static 'img/product/product-details-img4.jpg' %}" alt="" />
+                                    </div>
+                                    <div class="pro-large-img">
+                                        <img src="{% static 'img/product/product-details-img5.jpg' %}" alt="" />
+                                    </div>
+                                </div>
+                                <div class="pro-nav slick-padding2 slick-arrow-style_2">
+                                    <div class="pro-nav-thumb"><img
+                                            src="{% static 'img/product/product-details-img1.jpg' %}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img
+                                            src="{% static 'img/product/product-details-img2.jpg' %}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img
+                                            src="{% static 'img/product/product-details-img3.jpg' %}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img
+                                            src="{% static 'img/product/product-details-img4.jpg' %}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img
+                                            src="{% static 'img/product/product-details-img5.jpg' %}" alt="" /></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="product-details-des mt-md-34 mt-sm-34">
+                                    <h3><a href="product-details.html">external product 12</a></h3>
+                                    <div class="ratings">
+                                        <span class="good"><i class="fa fa-star"></i></span>
+                                        <span class="good"><i class="fa fa-star"></i></span>
+                                        <span class="good"><i class="fa fa-star"></i></span>
+                                        <span class="good"><i class="fa fa-star"></i></span>
+                                        <span><i class="fa fa-star"></i></span>
+                                        <div class="pro-review">
+                                            <span>1 review(s)</span>
+                                        </div>
+                                    </div>
+                                    <div class="availability mt-10">
+                                        <h5>Availability:</h5>
+                                        <span>1 in stock</span>
+                                    </div>
+                                    <div class="pricebox">
+                                        <span class="regular-price">$160.00</span>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.<br>
+                                        Phasellus id nisi quis justo tempus mollis sed et dui. In hac habitasse platea
+                                        dictumst. Suspendisse ultrices mauris diam. Nullam sed aliquet elit. Mauris
+                                        consequat nisi ut mauris efficitur lacinia.</p>
+                                    <div class="quantity-cart-box d-flex align-items-center mt-20">
+                                        <div class="quantity">
+                                            <div class="pro-qty"><input type="text" value="1"></div>
+                                        </div>
+                                        <div class="action_link">
+                                            <a class="buy-btn" href="#">add to cart<i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- product details inner end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick view modal end -->
+
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+
+
+    <!--All jQuery, Third Party Plugins & Activation (main.js' %}) Files-->
+    <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
+    <!-- Jquery Min Js -->
+    <script src="{% static 'js/vendor/jquery-3.3.1.min.js' %}"></script>
+    <!-- Popper Min Js -->
+    <script src="{% static 'js/vendor/popper.min.js' %}"></script>
+    <!-- Bootstrap Min Js -->
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+    <!-- Plugins Js-->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <!-- Ajax Mail Js -->
+    <script src="{% static 'js/ajax-mail.js' %}"></script>
+    <!-- Active Js -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <!-- Switcher JS [Please Remove this when Choose your Final Projct] -->
+    <script src="{% static 'js/switcher.js' %}"></script>
+</body>
+
+
+
+</html>

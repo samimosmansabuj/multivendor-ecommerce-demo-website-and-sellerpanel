@@ -1,0 +1,235 @@
+{% extends 'seller/base/seller_base.html' %}
+{% block seller_panel_title %}
+<title>Add Product - Safa World</title>
+{% endblock seller_panel_title %}
+
+
+{% block dashboard_body %}
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row">
+            <div class="col">
+                <h3 class="page-title">Order ID#{{order.order_id}}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'admin_panel' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Order</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Order ID#{{order.order_id}}</h5>
+                </div>
+                <div class="card-body">
+
+                    <!-- --------------------Order Details Section------------------------------------------------ -->
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <span class="input-group-text">ORDER ID</span>
+                                                <input class="form-control" type="text" name="order_id"
+                                                    value="{{order.order_id}}" readonly
+                                                    style="background-color: white;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="form-group mb-0 row">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <span class="input-group-text">Total Ammount</span>
+                                                <input style="text-align: center; background-color: white;"
+                                                    class="form-control" type="text" name="total_amount"
+                                                    value="{{order.total_amount}} BDT" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="form-group mb-0 row">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <span class="input-group-text">Status</span>
+                                                <input class="form-control" type="text" name="discount_price"
+                                                    value="{{order.status}}">
+                                                <select class="form-control" name="status" id="" {% if order.status == 'Delivered' %}disabled {% endif %}>
+                                                    <option value="{{order.status}}" selected>STATUS</option>
+                                                    <option value="Pending">Pending</option>
+                                                    <option value="Recieved">Recieved</option>
+                                                    <option value="Processing">Processing</option>
+                                                    <option value="On The Way">On The Way</option>
+                                                    <option value="Delivered">Delivered</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="form-group mb-0 row">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <span class="input-group-text">Payment</span>
+                                                {% if order.paid %}
+                                                <input class="form-control" type="text" name="discount_price"
+                                                    value="Paid" readonly
+                                                    style="background-color: white; text-align: center;">
+                                                {% else %}
+                                                <input class="form-control" type="text" name="discount_price"
+                                                    value="Unpaid" readonly
+                                                    style="background-color: white; text-align: center;">
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                {% if not order.status == 'Delivered' %}
+                                <div style="text-align: center;">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                                {% endif %}
+
+
+                    </form>
+
+                    <br><br>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <h4>Ship To</h4>
+                                    <p>Name: {{order.first_name}} {{order.last_name}}</p>
+                                    <p>Phone Number: {{order.phone_number}}</p>
+                                    <p>Email: {{order.email}}</p>
+                                    <p>Address: {{order.address}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"><strong>Order summary</strong></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                    <tr>
+                                                        <td><strong>Item</strong></td>
+                                                        <td class="text-center"><strong>Price</strong></td>
+                                                        <td class="text-center"><strong>Quantity</strong></td>
+                                                        <td class="text-right" style="text-align: right;">
+                                                            <strong>Totals</strong>
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                                    {% for orderitems in orderitems %}
+                                                    <tr>
+                                                        <td>{{orderitems.product.product_title}}</td>
+                                                        <td class="text-center">
+                                                            {{orderitems.product.discount_price}}</td>
+                                                        <td class="text-center">{{orderitems.quantity}}</td>
+                                                        <td class="text-right" style="text-align: right;">
+                                                            {{orderitems.total_price}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    <tr>
+                                                        <td class="thick-line"></td>
+                                                        <td class="thick-line"></td>
+                                                        <td class="thick-line text-center">
+                                                            <strong>Subtotal</strong>
+                                                        </td>
+                                                        <td class="thick-line text-right" style="text-align: right;">
+                                                            {{order.total_amount}}
+                                                            BDT</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="no-line"></td>
+                                                        <td class="no-line"></td>
+                                                        <td class="no-line text-center">
+                                                            <strong>Shipping</strong>
+                                                        </td>
+                                                        <td class="no-line text-right" style="text-align: right;">Free
+                                                            Shipping</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="no-line"></td>
+                                                        <td class="no-line"></td>
+                                                        <td class="no-line text-center"><strong>Total</strong>
+                                                        </td>
+                                                        <td class="no-line text-right" style="text-align: right;">
+                                                            {{order.total_amount}}
+                                                            BDT</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <br>
+                    <br>
+
+
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <a href="{% url 'order_invoice' order.order_id %}" class="btn btn-primary" target="_blank">Invoice</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+{% endblock dashboard_body %}

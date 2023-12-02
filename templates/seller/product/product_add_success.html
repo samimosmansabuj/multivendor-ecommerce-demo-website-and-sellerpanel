@@ -1,0 +1,27 @@
+{% extends 'seller/base/seller_base.html' %}
+{% block seller_panel_title %}
+<title>Add Product Success - Safa World</title>
+{% endblock seller_panel_title %}
+
+
+{% block dashboard_body %}
+<div class="success-box" style="margin: auto;padding: 100px;text-align: center;">
+    <h1>Congratulations!</h1>
+    <h3 class="h2 mb-3"><i class="fas fa-check"></i> Product Add Successfully Complete!</h3>
+    <p>{{product.product_title|title}}</p>
+    <p class="h4 font-weight-normal">Do you want to add more products? Then click Add More-</p>
+
+    <div class="row" style="width: 50%; margin: auto; margin-top: 30px;">
+        <div class="col-4">
+            <a href="{% url 'admin_panel' %}" class="btn btn-primary">Deshboard</a>
+        </div>
+        <div class="col-4">
+            <a href="{% url 'add_product' %}" class="btn btn-primary">Add New</a>
+        </div>
+        <div class="col-4">
+            <a href="{% url 'product_list' %}" class="btn btn-primary">Product</a>
+        </div>
+    </div>
+    
+</div>
+{% endblock dashboard_body %}
